@@ -1,0 +1,99 @@
+---
+title: "HW0 BST260"
+author: "Jiaxin Shen     HUID: 51570189"
+format: html
+execute:
+  echo: false
+---
+
+# 1.5 Exercise
+
+## 1.
+
+**Write a Quarto document that defines variables a, b, and c**
+
+```{r}
+# we initialize value of a, b, and c and can change the values of them later 
+# By changing the values of a, b, and c, the solutions of f(X) and plot will also 
+# change accordingly as shown in the later part of the pdf/html report.
+a <- 1
+b <- 3
+c <- 2
+
+# we print out the values of a, b, and c in the pdf/html report for reference
+cat("a is ", a, "\n")
+cat("b is ", b, "\n")
+cat("c is ", c, "\n")
+```
+
+**Print out the solutions of f(x). Do not report complex solutions, only real numbers.**
+
+$$ f(x) = ax^2 + bx + c = 0$$
+
+```{r}
+# To solve the equation of f(x) = 0, I use quadratic formula
+# x is solved by (-b plus or minus square root of discriminant) divided by 2a
+# where the values of a, b, c have previously-determined by us.
+# And discriminant (delta) is calculated by b^2 - 4ac by definition
+
+# we define and calculate discriminant by our previous values of a, b, and c.
+discriminant <- b^2 - 4 * a * c
+
+# writing the function of solving x for f(x) = 0 based using quadratic formula
+# By definition, if discriminant (delta) is positive, we have 2 real solutions of x1 and x2;
+# if discriminant is zero, we only have 1 real solution x;
+# if discriminant is negative, we have no real solution x (only complex solutions)
+
+# writing the function to solve the equation
+# use if-else statement to discuss the problem in 3 seperate cases
+if (discriminant > 0) {
+  # two real solutions x1 and x2
+  x1 <- (-b + sqrt(discriminant)) / (2 * a)
+  x2 <- (-b - sqrt(discriminant)) / (2 * a)
+  
+  cat("This equation has two real solutions:\n")
+  cat("x =", x1, "\n")
+  cat("x =", x2, "\n")
+} else if (discriminant == 0) {
+  # One real solution x
+  solution <- -b / (2 * a)
+  
+  cat("This equation has only one real solution:\n")
+  cat("x =", solution, "\n")
+} else {
+  cat("This equation has no real solutions (only containing complex roots).\n")
+}
+```
+
+## 2.
+
+**Include a graph of f(x) versus x for** $x \in (-5, 5)$
+
+```{r}
+# Set up x-axis range from -5 to 5 with 300 points
+x <- seq(-5, 5, length = 300)
+
+# plot the f(x) with x range from -5 to 5 and with the pre-determined values of a, b, and c
+plot(x, a*x^2 + b*x + c, type = "l")
+
+# draw the straight line on x-axis (indicating y = 0) for all x
+# look at the intersection of f(x) curve and the "y = 0" line
+# the intersecting point/points' x-value is the solution of the equation f(x) = 0
+abline(h = 0, lty = 2)
+```
+
+## 3
+
+**Generate a PDF report using knitr. Do not show the R code, only the solutions and explanations of what the reader is seeing.**
+
+## 4
+
+**Erase the PDF report and reproduce it but this time using** $a = 1, b = 2, c = 5$
+
+## 5
+
+**Erase the PDF report and reproduce it but this time using** $a = 1, b = 3, c = 2$
+
+## 6
+
+**Create an HTML page with the results for this last set of values, but this time showing the code.**
